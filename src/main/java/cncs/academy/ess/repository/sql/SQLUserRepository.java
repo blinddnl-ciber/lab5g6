@@ -52,10 +52,11 @@ public class SQLUserRepository implements UserRepository {
     public int save(User user) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement stmt = connection.prepareStatement(
-                     "INSERT INTO users (username, password) VALUES (?, ?)",
+                     "INSERT INTO users (username, password, salt) VALUES (?, ?, ?)",
                      Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getPassword());
+            stmt.setBytes(2, user.getPassword());
+            stmt.setBytes(3, user.getSalt());
             stmt.executeUpdate();
             int generatedId = 0;
             try (ResultSet rs = stmt.getGeneratedKeys()) {
@@ -99,7 +100,8 @@ public class SQLUserRepository implements UserRepository {
     private User mapResultSetToUser(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         String username = rs.getString("username");
-        String pwd = rs.getString("password");
-        return new User(id, username, pwd);
+        byte[] pwd = rs.getBytes("password");
+        byte[] salt = rs.getBytes("salt");
+        return new User(id, username, pwd, salt);
     }
 }

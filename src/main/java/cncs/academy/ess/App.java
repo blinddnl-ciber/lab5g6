@@ -12,19 +12,24 @@ import cncs.academy.ess.service.TodoListsService;
 import cncs.academy.ess.service.TodoUserService;
 import cncs.academy.ess.service.TodoService;
 import io.javalin.Javalin;
+import io.javalin.community.ssl.SslPlugin;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.security.NoSuchAlgorithmException;
 
 public class  App {
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        Javalin app = Javalin.create(config -> {
-            config.bundledPlugins.enableCors(cors -> {
-                cors.addRule(it -> {
-                    it.anyHost();
-                });
-            });
-        }).start(7100);
+
+        SslPlugin plugin = new SslPlugin(conf -> {
+            conf.pemFromPath(
+                    "ssl/cert.pem",
+                    "ssl/key.pem",
+                    "password");
+            conf.sniHostCheck = false;
+        });
+        Javalin app = Javalin.create(javalinConfig -> {
+            javalinConfig.registerPlugin(plugin);
+        }).start();
 
         // Initialize routes for user management
         //InMemoryUserRepository userRepository = new InMemoryUserRepository();

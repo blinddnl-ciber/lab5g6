@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    public void createUser(Context ctx) throws NoSuchAlgorithmException {
+    public void createUser(Context ctx) throws Exception {
         UserAddRequest userRequest = ctx.bodyAsClass(UserAddRequest.class);
         log.info("Create user: {}", userRequest.username);
         User user = userService.addUser(userRequest.username, userRequest.password);
@@ -46,7 +46,7 @@ public class UserController {
         ctx.status(204);
     }
 
-    public void loginUser(Context ctx) throws NoSuchAlgorithmException {
+    public void loginUser(Context ctx) throws Exception{
         UserLoginRequest userRequest = ctx.bodyAsClass(UserLoginRequest.class);
         log.info("Login user: {}", userRequest.username);
         String token = userService.login(userRequest.username, userRequest.password);
