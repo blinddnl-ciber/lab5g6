@@ -13,6 +13,7 @@ import cncs.academy.ess.service.TodoService;
 import io.javalin.Javalin;
 import io.javalin.community.ssl.SslPlugin;
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.casbin.jcasbin.main.Enforcer;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -49,7 +50,7 @@ public class  App {
         TodoService todoService = new TodoService(todoRepository, listsRepository);
         TodoController todoController = new TodoController(todoService, toDoListService);
 
-        AuthorizationMiddleware authMiddleware = new AuthorizationMiddleware(userRepository);
+        AuthorizationMiddleware authMiddleware = new AuthorizationMiddleware(userRepository, new Enforcer("src/main/java/cncs/academy/ess/model.conf", "src/main/java/cncs/academy/ess/policy.csv"));
 
         // CORS
         app.before(ctx -> {
