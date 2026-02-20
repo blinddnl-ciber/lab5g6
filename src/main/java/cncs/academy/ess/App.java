@@ -4,7 +4,6 @@ import cncs.academy.ess.controller.AuthorizationMiddleware;
 import cncs.academy.ess.controller.TodoController;
 import cncs.academy.ess.controller.TodoListController;
 import cncs.academy.ess.controller.UserController;
-import cncs.academy.ess.repository.memory.InMemoryTodoRepository;
 import cncs.academy.ess.repository.sql.SQLTodoRepository;
 import cncs.academy.ess.repository.sql.SQLUserRepository;
 import cncs.academy.ess.repository.sql.SQLTodoListsRepository;
