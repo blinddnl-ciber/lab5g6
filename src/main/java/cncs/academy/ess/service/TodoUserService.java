@@ -45,7 +45,7 @@ public class TodoUserService {
         }
         byte[] inputHashedPassword = hashPassword(inputPassword, user.getSalt());
         if (Arrays.equals(user.getPassword(),inputHashedPassword)) {
-            return createAuthToken(user);
+            return "Bearer " + createAuthToken(user);
         }
         return null;
     }
