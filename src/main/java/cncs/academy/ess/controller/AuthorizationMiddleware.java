@@ -36,8 +36,12 @@ public class AuthorizationMiddleware implements Handler {
         }
 
         // Allow unauthenticated requests to /login
-        if (ctx.path().equals("/login") && ctx.method().name().equals("POST"))
+        //if (ctx.path().equals("/login") && ctx.method().name().equals("POST"))
+            //return;
+        if ((ctx.path().equals("/user") && ctx.method().name().equals("POST")) ||
+                (ctx.path().equals("/login") && ctx.method().name().equals("POST"))) {
             return;
+        }
 
         // Check if authorization header exists
         String authorizationHeader = ctx.header("Authorization");

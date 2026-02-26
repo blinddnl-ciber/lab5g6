@@ -7,6 +7,9 @@ import cncs.academy.ess.controller.UserController;
 import cncs.academy.ess.repository.sql.SQLTodoRepository;
 import cncs.academy.ess.repository.sql.SQLUserRepository;
 import cncs.academy.ess.repository.sql.SQLTodoListsRepository;
+import cncs.academy.ess.repository.memory.InMemoryTodoRepository;
+import cncs.academy.ess.repository.memory.InMemoryUserRepository;
+import cncs.academy.ess.repository.memory.InMemoryTodoListsRepository;
 import cncs.academy.ess.service.TodoListsService;
 import cncs.academy.ess.service.TodoUserService;
 import cncs.academy.ess.service.TodoService;
@@ -32,21 +35,23 @@ public class  App {
         }).start();
 
         // Initialize routes for user management
-        //InMemoryUserRepository userRepository = new InMemoryUserRepository();
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("org.postgresql.Driver");
         String connectURI = String.format("jdbc:postgresql://%s:%s/%s?user=%s&password=%s", "localhost", "5432", "postgres", "postgres", "changeit");
         ds.setUrl(connectURI);
 
         SQLUserRepository userRepository = new SQLUserRepository(ds);
+        //InMemoryUserRepository userRepository = new InMemoryUserRepository();
         TodoUserService userService = new TodoUserService(userRepository);
         UserController userController = new UserController(userService);
 
         SQLTodoListsRepository listsRepository = new SQLTodoListsRepository(ds);
+        //InMemoryTodoListsRepository listsRepository = new InMemoryTodoListsRepository();
         TodoListsService toDoListService = new TodoListsService(listsRepository);
         TodoListController todoListController = new TodoListController(toDoListService);
 
         SQLTodoRepository todoRepository = new SQLTodoRepository(ds);
+        //InMemoryTodoRepository todoRepository = new InMemoryTodoRepository();
         TodoService todoService = new TodoService(todoRepository, listsRepository);
         TodoController todoController = new TodoController(todoService, toDoListService);
 
