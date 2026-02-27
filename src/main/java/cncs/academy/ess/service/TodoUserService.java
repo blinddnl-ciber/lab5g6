@@ -7,11 +7,17 @@ import java.util.Arrays;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+
+import java.util.Date;
 
 public class TodoUserService {
     private final UserRepository repository;
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
+    private static final String ISSUER = "o back-end";
+    private static final String JWT_SECRET = "secret-muito-importante-do-jwt";
 
     public TodoUserService(UserRepository userRepository) {
         this.repository = userRepository;
@@ -39,13 +45,22 @@ public class TodoUserService {
         }
         byte[] inputHashedPassword = hashPassword(inputPassword, user.getSalt());
         if (Arrays.equals(user.getPassword(),inputHashedPassword)) {
-            return createAuthToken(user);
+            return "Bearer " + createAuthToken(user);
         }
         return null;
     }
 
     private String createAuthToken(User user) {
-        return "Bearer " + user.getUsername();
+        Algorithm algorithm = Algorithm.HMAC256(JWT_SECRET);
+        Date now = new Date();
+        Date expires = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+        return JWT.create()
+                .withIssuer(ISSUER)
+                .withClaim("username", user.getUsername())
+                .withClaim("id", user.getId())
+                .withIssuedAt(now)
+                .withExpiresAt(expires)
+                .sign(algorithm);
     }
 
     private static byte[] hashPassword(String password, byte[] salt) throws Exception {
