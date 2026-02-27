@@ -32,9 +32,9 @@
               "options": { "raw": { "language": "json" } }
             },
             "url": {
-              "raw": "host.docker.internal:80/user",
+              "raw": "host.docker.internal:7100/user",
               "host": ["host.docker.internal"],
-              "port": "80",
+              "port": "7100",
               "path": ["user"]
             }
           }
@@ -65,9 +65,9 @@
               "options": { "raw": { "language": "json" } }
             },
             "url": {
-              "raw": "host.docker.internal:80/login",
+              "raw": "host.docker.internal:7100/login",
               "host": ["host.docker.internal"],
-              "port": "80",
+              "port": "7100",
               "path": ["login"]
             }
           }
@@ -106,9 +106,9 @@
           "options": { "raw": { "language": "json" } }
         },
         "url": {
-          "raw": "host.docker.internal:80/todolist",
+          "raw": "host.docker.internal:7100/todolist",
           "host": ["host.docker.internal"],
-          "port": "80",
+          "port": "7100",
           "path": ["todolist"]
         }
       }
@@ -141,9 +141,9 @@
           }
         ],
         "url": {
-          "raw": "host.docker.internal:80/todolist",
+          "raw": "host.docker.internal:7100/todolist",
           "host": ["host.docker.internal"],
-          "port": "80",
+          "port": "7100",
           "path": ["todolist"]
         }
       }
@@ -173,9 +173,9 @@
           }
         ],
         "url": {
-          "raw": "host.docker.internal:80/todolist/{{listId}}",
+          "raw": "host.docker.internal:7100/todolist/{{listId}}",
           "host": ["host.docker.internal"],
-          "port": "80",
+          "port": "7100",
           "path": ["todolist/{{listId}}"]
         }
       }
@@ -209,9 +209,9 @@
           "options": { "raw": { "language": "json" } }
         },
         "url": {
-          "raw": "host.docker.internal:80/todo/item",
+          "raw": "host.docker.internal:7100/todo/item",
           "host": ["host.docker.internal"],
-          "port": "80",
+          "port": "7100",
           "path": ["todo", "item"]
         }
       }

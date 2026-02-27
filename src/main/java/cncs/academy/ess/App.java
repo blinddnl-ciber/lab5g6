@@ -23,16 +23,20 @@ import java.security.NoSuchAlgorithmException;
 public class  App {
     public static void main(String[] args) throws NoSuchAlgorithmException {
 
-        SslPlugin plugin = new SslPlugin(conf -> {
+        /*SslPlugin plugin = new SslPlugin(conf -> {
             conf.pemFromPath(
                     "ssl/cert.pem",
                     "ssl/key.pem",
                     "password");
             conf.sniHostCheck = false;
-        });
-        Javalin app = Javalin.create(javalinConfig -> {
-            javalinConfig.registerPlugin(plugin);
-        }).start();
+        });*/
+        Javalin app = Javalin.create(config -> {
+            config.bundledPlugins.enableCors(cors -> {
+                cors.addRule(it -> {
+                    it.anyHost();
+                });
+            });
+        }).start(7100);
 
         // Initialize routes for user management
         BasicDataSource ds = new BasicDataSource();
