@@ -72,8 +72,9 @@ public class SQLTodoRepository implements TodoRepository {
                      "INSERT INTO todos (description,completed,list_id) VALUES (?, false , ?)",
                      Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, todo.getDescription());
-            stmt.setInt(3, todo.getListId());
+            stmt.setInt(2, todo.getListId());
             stmt.executeUpdate();
+
             int generatedId = 0;
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
