@@ -74,6 +74,7 @@ public class SQLTodoRepository implements TodoRepository {
             stmt.setString(1, todo.getDescription());
             stmt.setInt(2, todo.getListId());
             stmt.executeUpdate();
+
             int generatedId = 0;
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {

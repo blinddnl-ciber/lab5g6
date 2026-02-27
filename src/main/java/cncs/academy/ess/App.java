@@ -30,6 +30,7 @@ public class  App {
                     "password");
             conf.sniHostCheck = false;
         });*/
+
         Javalin app = Javalin.create(config -> {
             config.bundledPlugins.enableCors(cors -> {
                 cors.addRule(it -> {

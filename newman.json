@@ -217,6 +217,7 @@
       }
     }
   ],
+
   "variable1": [{ "key": "userToken", "value": "" }],
   "variable2": [{ "key": "listId", "value": "" }]
 }
