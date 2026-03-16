@@ -3,6 +3,11 @@ name: CI Pipeline
 on:
   workflow_dispatch:
 
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+  
 jobs:
   build:
     runs-on: ubuntu-latest
