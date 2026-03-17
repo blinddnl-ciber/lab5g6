@@ -65,6 +65,16 @@ jobs:
           name: Generate artifact with Trivy result
           path: trivy-results.sarif
 
+  create-container:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+      packages: write
+    needs: security-scan
+
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
