@@ -118,7 +118,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.35.0
         with:
-           image-ref: ${{ steps.meta.outputs.json }}
+           image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
            format: 'sarif'
            output: 'trivy-image-results.sarif'
       - name: Upload artifact to pipeline metadata
