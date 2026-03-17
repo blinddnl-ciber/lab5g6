@@ -13,7 +13,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TodoUserServiceTest {
+public class ToDoUserServiceTest {
 
     private TodoUserService service;
     private InMemoryUserRepository repository;

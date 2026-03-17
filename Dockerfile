@@ -27,7 +27,7 @@ WORKDIR /app
 RUN addgroup -S javalin && adduser -S javalin -G javalin
 
 # Copiar apenas o JAR compilado
-COPY --from=build target/taskslist-phase1-1.0-SNAPSHOT-jar-with-dependencies.jar app.jar
+COPY --from=build target/taskslist-lab3-1.0-SNAPSHOT.jar app.jar
 
 # Ownership
 RUN chown -R javalin:javalin /app
